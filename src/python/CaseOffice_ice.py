@@ -331,7 +331,7 @@ if 'ApplicantPrx' not in _M_CaseOffice.__dict__:
     _M_CaseOffice._t_ApplicantDisp = IcePy.defineClass('::CaseOffice::Applicant', Applicant, (), None, ())
     Applicant._ice_type = _M_CaseOffice._t_ApplicantDisp
 
-    Applicant._op_receiveResults = IcePy.Operation('receiveResults', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_CaseOffice._t_CaseResults, False, 0),), (), None, ())
+    Applicant._op_receiveResults = IcePy.Operation('receiveResults', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_CaseOffice._t_CaseResults, False, 0),), (), ((), IcePy._t_bool, False, 0), ())
 
     _M_CaseOffice.Applicant = Applicant
     del Applicant
@@ -410,7 +410,7 @@ if 'OfficePrx' not in _M_CaseOffice.__dict__:
     Office._ice_type = _M_CaseOffice._t_OfficeDisp
 
     Office._op_makeCaseRequest = IcePy.Operation('makeCaseRequest', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_CaseOffice._t_CaseRequest, False, 0),), (), ((), _M_CaseOffice._t_CaseAck, False, 0), ())
-    Office._op_checkCaseResults = IcePy.Operation('checkCaseResults', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0), ((), _M_CaseOffice._t_ApplicantPrx, False, 0)), (), None, ())
+    Office._op_checkCaseResults = IcePy.Operation('checkCaseResults', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0), ((), _M_CaseOffice._t_ApplicantPrx, False, 0)), (), ((), IcePy._t_long, False, 0), ())
 
     _M_CaseOffice.Office = Office
     del Office

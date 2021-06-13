@@ -19,7 +19,7 @@ public interface Office extends com.zeroc.Ice.Object
 {
     CaseAck makeCaseRequest(CaseRequest caseRequest, com.zeroc.Ice.Current current);
 
-    void checkCaseResults(String applicantID, ApplicantPrx applicant, com.zeroc.Ice.Current current);
+    long checkCaseResults(String applicantID, ApplicantPrx applicant, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -82,8 +82,11 @@ public interface Office extends com.zeroc.Ice.Object
         iceP_applicantID = istr.readString();
         iceP_applicant = ApplicantPrx.uncheckedCast(istr.readProxy());
         inS.endReadParams();
-        obj.checkCaseResults(iceP_applicantID, iceP_applicant, current);
-        return inS.setResult(inS.writeEmptyParams());
+        long ret = obj.checkCaseResults(iceP_applicantID, iceP_applicant, current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ostr.writeLong(ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /** @hidden */

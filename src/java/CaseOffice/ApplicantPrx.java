@@ -17,22 +17,22 @@ package CaseOffice;
 
 public interface ApplicantPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void receiveResults(CaseResult[] caseResults)
+    default boolean receiveResults(CaseResult[] caseResults)
     {
-        receiveResults(caseResults, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return receiveResults(caseResults, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void receiveResults(CaseResult[] caseResults, java.util.Map<String, String> context)
+    default boolean receiveResults(CaseResult[] caseResults, java.util.Map<String, String> context)
     {
-        _iceI_receiveResultsAsync(caseResults, context, true).waitForResponse();
+        return _iceI_receiveResultsAsync(caseResults, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> receiveResultsAsync(CaseResult[] caseResults)
+    default java.util.concurrent.CompletableFuture<java.lang.Boolean> receiveResultsAsync(CaseResult[] caseResults)
     {
         return _iceI_receiveResultsAsync(caseResults, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> receiveResultsAsync(CaseResult[] caseResults, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Boolean> receiveResultsAsync(CaseResult[] caseResults, java.util.Map<String, String> context)
     {
         return _iceI_receiveResultsAsync(caseResults, context, false);
     }
@@ -44,12 +44,16 @@ public interface ApplicantPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_receiveResultsAsync(CaseResult[] iceP_caseResults, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> _iceI_receiveResultsAsync(CaseResult[] iceP_caseResults, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "receiveResults", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "receiveResults", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      CaseResultsHelper.write(ostr, iceP_caseResults);
-                 }, null);
+                 }, istr -> {
+                     boolean ret;
+                     ret = istr.readBool();
+                     return ret;
+                 });
         return f;
     }
 

@@ -57,22 +57,22 @@ public interface OfficePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default void checkCaseResults(String applicantID, ApplicantPrx applicant)
+    default long checkCaseResults(String applicantID, ApplicantPrx applicant)
     {
-        checkCaseResults(applicantID, applicant, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return checkCaseResults(applicantID, applicant, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void checkCaseResults(String applicantID, ApplicantPrx applicant, java.util.Map<String, String> context)
+    default long checkCaseResults(String applicantID, ApplicantPrx applicant, java.util.Map<String, String> context)
     {
-        _iceI_checkCaseResultsAsync(applicantID, applicant, context, true).waitForResponse();
+        return _iceI_checkCaseResultsAsync(applicantID, applicant, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> checkCaseResultsAsync(String applicantID, ApplicantPrx applicant)
+    default java.util.concurrent.CompletableFuture<java.lang.Long> checkCaseResultsAsync(String applicantID, ApplicantPrx applicant)
     {
         return _iceI_checkCaseResultsAsync(applicantID, applicant, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> checkCaseResultsAsync(String applicantID, ApplicantPrx applicant, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Long> checkCaseResultsAsync(String applicantID, ApplicantPrx applicant, java.util.Map<String, String> context)
     {
         return _iceI_checkCaseResultsAsync(applicantID, applicant, context, false);
     }
@@ -85,13 +85,17 @@ public interface OfficePrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_checkCaseResultsAsync(String iceP_applicantID, ApplicantPrx iceP_applicant, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Long> _iceI_checkCaseResultsAsync(String iceP_applicantID, ApplicantPrx iceP_applicant, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "checkCaseResults", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Long> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "checkCaseResults", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_applicantID);
                      ostr.writeProxy(iceP_applicant);
-                 }, null);
+                 }, istr -> {
+                     long ret;
+                     ret = istr.readLong();
+                     return ret;
+                 });
         return f;
     }
 

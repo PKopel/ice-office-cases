@@ -17,7 +17,7 @@ package CaseOffice;
 
 public interface Applicant extends com.zeroc.Ice.Object
 {
-    void receiveResults(CaseResult[] caseResults, com.zeroc.Ice.Current current);
+    boolean receiveResults(CaseResult[] caseResults, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -57,8 +57,11 @@ public interface Applicant extends com.zeroc.Ice.Object
         CaseResult[] iceP_caseResults;
         iceP_caseResults = CaseResultsHelper.read(istr);
         inS.endReadParams();
-        obj.receiveResults(iceP_caseResults, current);
-        return inS.setResult(inS.writeEmptyParams());
+        boolean ret = obj.receiveResults(iceP_caseResults, current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ostr.writeBool(ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /** @hidden */

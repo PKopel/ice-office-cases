@@ -27,11 +27,11 @@ module CaseOffice {
     sequence<CaseResult> CaseResults;
 
     interface Applicant {
-        void receiveResults(CaseResults caseResults);
+        bool receiveResults(CaseResults caseResults);
     };
 
     interface Office {
         CaseAck makeCaseRequest(CaseRequest caseRequest);
-        void checkCaseResults(string applicantID, Applicant* applicant);
+        long checkCaseResults(string applicantID, Applicant* applicant);
     };
 };
