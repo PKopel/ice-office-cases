@@ -1,0 +1,8 @@
+Office.Proxy=Office : tcp -h 127.0.0.2 -p 10000 -z
+Applicant.Endpoints=tcp -h 127.0.0.2 -p 10001 -z -t 10000
+
+Ice.Warn.Connections=1
+
+Ice.ACM.Timeout=10
+
+Ice.Trace.Network=1
